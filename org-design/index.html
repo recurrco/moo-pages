@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MOO Org Design — Assessment &amp; Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8ED; --ink:#2B2B2B; --blue:#4361EE; --yellow:#FFE100; --red:#FE5152;
+    --line:#2B2B2B; --muted:#7A7268; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--cream); color:var(--ink); line-height:1.55;
+    padding:0 0 96px;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+  header.top{padding:56px 0 32px; border-bottom:3px solid var(--line); margin-bottom:40px;}
+  .kicker{font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
+  h1{
+    font-family:'Bebas Neue',sans-serif; font-size:clamp(38px,6vw,64px);
+    letter-spacing:.01em; line-height:.98; margin:10px 0 16px;
+  }
+  .status{
+    display:inline-flex; align-items:center; gap:8px; background:var(--yellow);
+    border:2px solid var(--line); border-radius:999px; padding:6px 16px;
+    font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+  }
+  .status::before{content:"●"; color:var(--red); font-size:10px;}
+  .dek{font-size:16px; color:var(--muted); max-width:620px; margin-top:16px;}
+  section{margin-bottom:56px;}
+  h2{
+    font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:.01em;
+    margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid var(--line);
+  }
+  h3{font-size:16px; font-weight:800; margin:24px 0 8px;}
+  p{margin-bottom:14px; font-size:15px;}
+  p.lede{font-size:17px; font-weight:600;}
+  ul, ol{margin:0 0 14px 22px; font-size:15px;}
+  li{margin-bottom:6px;}
+  strong{font-weight:700;}
+  .callout{
+    background:var(--card); border:2px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin:20px 0;
+  }
+  .callout.headline{background:var(--ink); color:var(--cream); border-color:var(--ink);}
+  .callout.headline h3{color:var(--yellow);}
+  .callout.red{border-color:var(--red);}
+  .callout.red h3{color:var(--red);}
+  table{width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--card); border:2px solid var(--line); border-radius:12px; overflow:hidden;}
+  th, td{text-align:left; padding:11px 14px; border-bottom:1px solid #E5DFD4; vertical-align:top;}
+  th{background:var(--ink); color:var(--cream); font-size:12px; text-transform:uppercase; letter-spacing:.04em; font-weight:700;}
+  tr:last-child td{border-bottom:none;}
+  .verdict-held{color:#1E7B34; font-weight:700;}
+  .verdict-failed{color:var(--red); font-weight:700;}
+  .verdict-late{color:#B8860B; font-weight:700;}
+  .quote{
+    border-left:4px solid var(--blue); background:var(--card); border-radius:0 12px 12px 0;
+    padding:14px 18px; margin:14px 0; font-size:14px; font-style:italic;
+  }
+  .quote .src{display:block; font-style:normal; font-size:12px; color:var(--muted); margin-top:8px; font-weight:600;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr;}}
+  .tag{
+    display:inline-block; background:var(--cream); border:1.5px solid var(--line);
+    border-radius:6px; padding:2px 8px; font-size:11px; font-weight:700; margin-right:6px;
+  }
+  .sources-list{list-style:none; margin:0; font-size:13px;}
+  .sources-list li{
+    padding:10px 0; border-bottom:1px solid #E5DFD4; display:flex; gap:10px; align-items:baseline;
+  }
+  .sources-list li:last-child{border-bottom:none;}
+  .src-count{font-family:'Bebas Neue',sans-serif; font-size:20px; min-width:64px; color:var(--blue);}
+  .open-q{background:var(--card); border:2px dashed var(--red); border-radius:12px; padding:16px 18px; margin-bottom:12px;}
+  .open-q .qlabel{font-size:11px; font-weight:800; text-transform:uppercase; color:var(--red); letter-spacing:.04em;}
+  footer{border-top:2px solid var(--line); padding-top:24px; margin-top:64px; font-size:12px; color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kicker">Ministry of Oats · Internal</div>
+    <h1>Org Design —<br>Assessment &amp; Proposal</h1>
+    <span class="status">Proposal · not yet decided</span>
+    <p class="dek">A read of where the team's actual JDs and workload sit today, against a 60‑day window of real operating channels — not a re-statement of intent, an assessment of what's actually happening on the floor. Ends in a proposed program map and per-person KPIs, both open for debate.</p>
+  </header>
+
+  <section id="headline">
+    <div class="callout headline">
+      <h3>The one-line finding</h3>
+      <p style="margin:0; color:var(--cream); font-size:16px;">The platform build and the org build were supposed to co-evolve. Neither half delivered — and that's not a coincidence. There was never an up-leveled operator role ready to <em>use</em> a dashboard-style tool, so tooling built for that role had nothing to land on. <strong>The org gap and the tech gap are the same gap, not two separate problems.</strong></p>
+    </div>
+  </section>
+
+  <section id="method">
+    <h2>Where this comes from</h2>
+    <p>Not inference from job descriptions or memory — a direct read of the channels where the business actually runs, cross-referenced against three independent sources so no single one is trusted alone.</p>
+    <ul class="sources-list">
+      <li><span class="src-count">~950</span> <div><strong>MOO Leaders</strong> WhatsApp, Jun 30 – Aug 29 2026 (60 days, full read, no sampling gaps). The daily store-ops command channel — RCA loop on quality complaints, inventory SOP enforcement.</div></li>
+      <li><span class="src-count">~370</span> <div><strong>CORE OPS Outpost</strong> WhatsApp, same window. Execution channel: KPT, stock-outs, variance, staff ops, corporate catering.</div></li>
+      <li><span class="src-count">~480</span> <div><strong>Central Store</strong> WhatsApp, same window. GRN/PO approvals, dispatch, recurring stock-outs.</div></li>
+      <li><span class="src-count">~1,600</span> <div><strong>Kitchen Operations</strong> WhatsApp, same window (full read of the most recent 8 days, weekly spot-checks across the rest to confirm the pattern held).</div></li>
+      <li><span class="src-count">+3</span> <div>Aggregator WhatsApp groups (Zomato, Swiggy, Ownly) and <strong>6 vendor groups</strong> (Namma Fruits, Squarepoint, MFP↔Outpost Kitchens, MOO×Bolas, TNT Sales+Marketing, Outpost Kitchen PCIS).</div></li>
+      <li><span class="src-count">6 mo</span> <div><strong>Granola</strong> check-in transcripts with Manju, Rushil, and Abhi — the recurring-themes read across the last two quarters.</div></li>
+      <li><span class="src-count">3 docs</span> <div><strong>Drive</strong>: Abhi's <em>Week 26 Platform/Category Review</em> (SKU + channel-level, the most rigorous doc in the vault), Manju's Charter (M1–M6 ops build-out plan), Rushil's <em>Marketing Review | JAS 2026</em>.</div></li>
+    </ul>
+  </section>
+
+  <section id="jd-reality">
+    <h2>April JDs vs. August ground truth</h2>
+    <p>Three JDs were drafted mid-April with Q1 asks attached. Checked each against what the 60-day window actually shows.</p>
+    <table>
+      <tr><th>Person</th><th>JD's Q1 ask</th><th>What the window shows</th><th>Verdict</th></tr>
+      <tr>
+        <td><strong>Abhi</strong></td>
+        <td>Own category + aggregator P&amp;L end-to-end; Pratik exits the Tuesday table by Jun 30</td>
+        <td>Operating independently on Cart + Category — Zomato tier negotiation, CPG box print approval, procurement escalations, all self-directed</td>
+        <td><span class="verdict-held">Mostly held</span></td>
+      </tr>
+      <tr>
+        <td><strong>Manju</strong></td>
+        <td>Stop being kitchen ops' single point of failure; 2 promoted store leaders own daily ops by Jun 30; Manju supervises from central, walks stores weekly not daily</td>
+        <td>Did not happen. One person is still the daily RCA-enforcer, KPT-chaser and discipline-issuer across 4 separate WhatsApp channels — exactly the single-point-of-failure pattern the JD tried to kill</td>
+        <td><span class="verdict-failed">Failed — the single biggest org gap</span></td>
+      </tr>
+      <tr>
+        <td><strong>Rushil</strong></td>
+        <td>MOO at X partner sales live, 3K embedded orders/mo exit rate, by Jun 30</td>
+        <td>Breakfast &amp; Business was "yet to start" per his own July marketing deck; first real Fridge placement (Goodera) lands Aug 31</td>
+        <td><span class="verdict-late">~2 quarters late</span></td>
+      </tr>
+    </table>
+    <p style="font-size:13px; color:var(--muted); margin-top:-8px;">Manju's own JD line: <em>"10% — Outpost Platform adoption. Drive store module to 100% compliance once it ships."</em> Neither half delivered, on the same person's JD — reinforcing that this isn't two separate problems.</p>
+  </section>
+
+  <section id="notes-from-the-floor">
+    <h2>Notes from the floor</h2>
+    <p>Specific, dated evidence behind the assessment above — not summary claims.</p>
+
+    <div class="grid2">
+      <div>
+        <h3>RCA quality — never fixed, named 3× by the ops lead himself</h3>
+        <div class="quote">"RCAs are done to stop the complaints not to repeat the same thing again and again"<span class="src">MOO Leaders · Jul 4</span></div>
+        <div class="quote">"Guys why the RCAs not shared yet ?"<span class="src">MOO Leaders · Aug 13</span></div>
+      </div>
+      <div>
+        <h3>Koramangala ratings crisis</h3>
+        <div class="quote">"I'm really concerned on the ratings of Koramangala… For the next 15 days just focus on this… I'm okay if the KPT is high but not with complaints and low ratings."<span class="src">CORE OPS Outpost · Aug 21 — 15-day remediation plan, outcome unconfirmed as of window's end</span></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <h3>The KPT vs. quality tradeoff, named explicitly</h3>
+        <div class="quote">"I'm okay with higher KPT but not the missing and wrong order"<span class="src">MOO Leaders · Aug 5</span></div>
+      </div>
+      <div>
+        <h3>Blueberries — flagged urgent 4 times in one month</h3>
+        <div class="quote">Central Store stock-out escalations on the same item: Aug 18, Aug 20, Aug 22, Aug 26 — the one recurring shortage that never got durably fixed across the whole 60-day window.</div>
+      </div>
+    </div>
+
+    <h3>Week 29 COGS by store (Jul 21, shared in-channel)</h3>
+    <table>
+      <tr><th>Store</th><th>Food cost</th><th>Packaging</th><th>Overall COGS</th></tr>
+      <tr><td>Whitefield</td><td>20.86%</td><td>4.89%</td><td>26.31%</td></tr>
+      <tr><td>Indiranagar</td><td>23.31%</td><td>5.43%</td><td>29.40% <span style="color:var(--muted); font-weight:400;">(flagged as inflated by a Week-28 inventory error)</span></td></tr>
+      <tr><td>HSR</td><td>20.91%</td><td>5.43%</td><td>26.34%</td></tr>
+      <tr><td><strong>Overall</strong></td><td><strong>21.77%</strong></td><td><strong>5.29%</strong></td><td><strong>27.44%</strong></td></tr>
+    </table>
+
+    <h3>From Granola — the arc of the last 6 months</h3>
+    <p><strong>Mar–Apr:</strong> pure store firefighting → <strong>Jun–Jul:</strong> category/product strategy → <strong>Aug:</strong> almost entirely fundraise. Matches the WhatsApp read exactly: ops has been running on autopilot while attention moved upstream. Two recurring items that never closed: the <strong>JP Nagar 40%+ COGS mystery</strong> ran for months before being traced to inventory <em>entry</em> error, not real shrinkage; a <strong>₹5,000/store staffing incentive</strong> existed for months with zero stores ever qualifying for it.</p>
+  </section>
+
+  <section id="proposed-map">
+    <h2>Proposed program × owner map</h2>
+    <p class="lede">Not "7 programs, pick an owner" — spread the load off Abhi and onto Manju's now-real bench, and use Ankita as the incubator for anything genuinely unowned.</p>
+    <table>
+      <tr><th>Program</th><th>Owner</th><th>Why</th></tr>
+      <tr><td><strong>Cart</strong></td><td>Abhi <span class="tag">unchanged</span></td><td>Strongest, most JD-aligned work — don't touch it.</td></tr>
+      <tr><td><strong>Kitchen Ops</strong></td><td>Manju (oversight) → <strong>Yiben + Rishabh</strong> (execution)</td><td>The delegation April promised and never happened — now there's an actual bench to hand it to.</td></tr>
+      <tr><td><strong>Dispatch</strong></td><td>Manju (oversight) → <strong>Shivaraj</strong> (execution)</td><td>Central kitchen production + dispatch is literally his job description.</td></tr>
+      <tr><td><strong>Breakfast &amp; Business</strong></td><td><strong>Rushil</strong></td><td>Already has real motion (Neighbour.com DIY-bar deal, Goodera Fridge) — needs clean KPIs and a reporting rhythm, not a new muscle.</td></tr>
+      <tr><td><strong>Oatmeal Gang</strong> (membership/community)</td><td><strong>Ankita</strong>, new-initiative stand-up</td><td>Genuinely unowned today. Not handed to Rushil on top of B&amp;B — that repeats the Abhi mistake.</td></tr>
+      <tr><td><strong>CPG</strong></td><td><strong>Ankita</strong>, new-initiative stand-up</td><td>Real motion (packaging already printing) with nobody accountable end-to-end. Abhi is explicitly overloaded — don't add to him.</td></tr>
+      <tr><td><strong>Brand</strong></td><td>Maintained function, no owner-JD yet</td><td>Running fine at low intensity via Contentlogy + occasional Rushil oversight. Don't manufacture a program for something that isn't broken.</td></tr>
+    </table>
+  </section>
+
+  <section id="abhi-split">
+    <h2>Abhi — the logical binding</h2>
+    <p>His current 5 JTBDs, split into keep vs. move. The overload isn't a capacity problem — 3 of 5 responsibilities were never really "Cart," they got absorbed by default because nobody else existed to catch them.</p>
+    <table>
+      <tr><th>JTBD</th><th>Verdict</th><th>Where it goes</th></tr>
+      <tr><td>Discounting/ads across platforms + category P&amp;L</td><td><span class="verdict-held">Keep</span></td><td>This is Cart, his core — automate the daily ritual harder</td></tr>
+      <tr><td>Category strength (existing menu performance)</td><td><span class="verdict-held">Keep</span></td><td>Other half of the same weekly review he already runs well</td></tr>
+      <tr><td>Procurement</td><td><span class="verdict-failed">Move</span></td><td>A supply-chain function, not category — goes to Manju/Shivaraj's Dispatch</td></tr>
+      <tr><td>New recipes / NPD</td><td><span class="verdict-late">Move (mostly)</span></td><td>Recipe Room already exists for this — route through CPG owner, Abhi consulted not owning</td></tr>
+      <tr><td>New category launches</td><td><span class="verdict-failed">Move</span></td><td>Same logic as NPD — a CPG job, not a weekly-Cart-review job</td></tr>
+    </table>
+  </section>
+
+  <section id="automation">
+    <h2>Automation opportunities — Manju's bench, via the Rista API</h2>
+    <ol>
+      <li><strong>Variance</strong> — same-day entry-vs-system mismatch detection instead of a mid-month mystery (the JP Nagar case, solved).</li>
+      <li><strong>GRN/dispatch</strong> — currently 100% WhatsApp screenshots. Rista already has the transaction data; this is a reporting gap, not a data gap.</li>
+      <li><strong>COGS-by-store, weekly</strong> — already computed by hand every week from data Rista already has. Close to a one-click report.</li>
+      <li><strong>Supplier scorecard</strong> — a standing view would have caught MFP's ~₹42K balance + repeat quality complaint before it sat unresolved.</li>
+    </ol>
+    <p style="font-size:13px; color:var(--muted);">Shivaraj is the natural first user of #1/#2/#4; a store-level version of #1/#3 is what Yiben/Rishabh's new store-audit scope needs.</p>
+  </section>
+
+  <section id="kpis">
+    <h2>Per-person KPI + cadence — starting point</h2>
+    <p style="font-size:13px; color:var(--muted); margin-top:-10px;">Proposals to pressure-test with each person directly, not final until they've had input.</p>
+    <table>
+      <tr><th>Person</th><th>Core KPIs (proposed)</th><th>Cadence</th></tr>
+      <tr><td><strong>Abhi</strong></td><td>Blended aggregator margin, AOV, WoW store growth (3 stores), listing-health incidents/week</td><td>Daily numbers ping (automated) · weekly Thu review · monthly P&amp;L close</td></tr>
+      <tr><td><strong>Rushil</strong></td><td>B&amp;B pipeline by stage, events closed/mo, revenue/event, Fridge placements live</td><td>Daily pipeline pulse · weekly sprint review · monthly report</td></tr>
+      <tr><td><strong>Manju</strong></td><td>Direct margin %, critical QC incidents, % of daily ops handled by Yiben/Rishabh (the real handoff metric)</td><td>Weekly store-leader 1:1s · weekly rotating store walk · monthly leadership review</td></tr>
+      <tr><td><strong>Shivaraj</strong></td><td>Dispatch on-time %, production variance (planned vs actual), GRN turnaround</td><td>Daily central priority · weekly logistics sync with Manju</td></tr>
+      <tr><td><strong>Yiben / Rishabh</strong></td><td>Store audit score, KPT, complaint rate <span style="color:var(--muted);">(track, don't rank on — per the QC Room's own caveat)</span>, training completion</td><td>Daily store checklist · weekly 1:1 with Manju</td></tr>
+      <tr><td><strong>Ankita</strong></td><td>New-initiative milestones (CPG, Oatmeal Gang — stage-gated, not revenue yet) + CoS cadence health</td><td>Weekly cross-team check-ins she already runs</td></tr>
+    </table>
+  </section>
+
+  <section id="open">
+    <h2>Open questions — genuinely undecided</h2>
+    <div class="open-q">
+      <div class="qlabel">Needs your call</div>
+      <p style="margin:6px 0 0;"><strong>Is Ankita's double new-initiative load (CPG + Oatmeal Gang) on top of her standing CoS cadence sustainable?</strong> That's a real load stacked on a routine role — worth pressure-testing with her directly before this becomes final, not just asserted here.</p>
+    </div>
+    <div class="open-q">
+      <div class="qlabel">Needs your call</div>
+      <p style="margin:6px 0 0;"><strong>"Oatmeal Gang" currently means three different things</strong> in active use: the internal team WhatsApp ops chat, Rushil's Instagram content bucket, and the proposed gyms/fitness/community program. Worth resolving the name before any program doc gets written on it.</p>
+    </div>
+  </section>
+
+  <section id="path">
+    <h2>Path to mid-September</h2>
+    <ol>
+      <li><strong>This week:</strong> lock the org map above — especially the Ankita load question.</li>
+      <li><strong>Next 1–2 weeks:</strong> 30-min working sessions — Rushil first (easiest, agreed), then Abhi, then Manju + Shivaraj + Yiben + Rishabh together as one operating unit — turning the proposed KPIs into something each person actually commits to.</li>
+      <li><strong>By early September:</strong> draft operating-plan docs per person/pod — Oct–Dec detailed, Jan–Mar rough.</li>
+      <li><strong>Mid-September:</strong> review pass before anyone sees theirs.</li>
+    </ol>
+  </section>
+
+  <footer>
+    Ministry of Oats · internal assessment, not for external distribution · compiled from the vault's Programs station recon, 2026-09-01
+  </footer>
+
+</div>
+</body>
+</html>
