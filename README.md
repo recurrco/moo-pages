@@ -14,11 +14,12 @@ Same shape as `recurrco/recurr-pages` (pages.recurr.co), minus its client-side p
 
 1. `mkdir {slug}/` at the repo root, put a self-contained `index.html` inside (inline styles/scripts or CDN links — no build step).
 2. Add a line to the root `index.html`'s page list (see the comment in that file for the exact `<li>` format).
-3. Commit and push to `main` — Cloudflare Pages auto-deploys.
-4. Share `https://pages.moo.kitchen/{slug}/` directly — no auth needed to view it.
+3. Commit and push to `main` (source of truth, kept in sync even though deploys aren't triggered by the push itself).
+4. Deploy: `npx wrangler pages deploy . --project-name moo-pages --branch main --commit-dirty=true`
+5. Share `https://pages.moo.kitchen/{slug}/` directly — no auth needed to view it.
 
 ## Infra
 
-- Cloudflare Pages, auto-deploy from `main`.
+- Cloudflare Pages, **direct-upload** (not Git-connected — deployed on request via `wrangler`, deliberately, to avoid an OAuth dashboard dependency).
 - Custom domain: `pages.moo.kitchen`.
-- Cloudflare Access application scoped to the exact root path (`/`), Google as identity provider.
+- Cloudflare Access application scoped to the exact root path (`/`), Google as identity provider, restricted to Pratik.
