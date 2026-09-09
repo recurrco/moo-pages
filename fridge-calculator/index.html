@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Build Your Office Fridge Program — Ministry of Oats</title>
+<meta name="description" content="See exactly what a Ministry of Oats office fridge program costs for your team. No calls, no back-and-forth.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --brand-primary: #FFD500;
+    --brand-secondary: #4361EE;
+    --brand-black: #1A1A1A;
+    --brand-white: #FFFFFF;
+    --brand-gray: #F5F5F5;
+    --brand-muted: #888888;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--brand-black);
+    background: var(--brand-white);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  h1, h2, .display {
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+    line-height: 1.02;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  .topbar {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    padding: 18px 0;
+  }
+  .topbar .wrap { display: flex; align-items: center; gap: 10px; }
+  .topbar .mark { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 0.03em; }
+  .topbar .mark span { color: var(--brand-primary); }
+
+  .hero {
+    padding: 64px 0 48px;
+    text-align: center;
+    background: var(--brand-secondary);
+    color: var(--brand-white);
+  }
+  .hero h1 { font-size: clamp(34px, 6vw, 54px); margin-bottom: 16px; }
+  .hero p { font-size: 17px; opacity: 0.92; max-width: 46ch; margin: 0 auto; }
+
+  section { padding: 56px 0; }
+
+  .calc-box {
+    background: var(--brand-white);
+    border: 2px solid var(--brand-black);
+    border-radius: 20px;
+    padding: 36px;
+    margin-top: -80px;
+    position: relative;
+    box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+  }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 26px; }
+  .field label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .field input[type="number"] {
+    width: 100%;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 14px 16px;
+    border: 2px solid #e2e2e2;
+    border-radius: 10px;
+    font-family: 'Inter';
+  }
+  .field input[type="number"]:focus { outline: none; border-color: var(--brand-secondary); }
+  .day-toggle { display: flex; gap: 10px; }
+  .day-toggle label {
+    flex: 1;
+    text-align: center;
+    padding: 14px 10px;
+    border: 2px solid #e2e2e2;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0;
+  }
+  .day-toggle input { display: none; }
+  .day-toggle label:has(input:checked) { border-color: var(--brand-secondary); background: #EEF1FE; color: var(--brand-secondary); }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    background: var(--brand-black);
+    color: var(--brand-white);
+    font-weight: 700;
+    font-size: 17px;
+    padding: 17px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn:hover { background: var(--brand-secondary); }
+
+  .plan-result { margin-top: 32px; padding-top: 32px; border-top: 2px dashed #ddd; display: none; }
+  .plan-result.visible { display: block; }
+  .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .plan-stat { background: var(--brand-gray); border-radius: 12px; padding: 18px 20px; }
+  .plan-stat .label { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-muted); font-weight: 700; margin-bottom: 6px; }
+  .plan-stat .value { font-family: 'Bebas Neue'; font-size: 30px; }
+  .plan-stat .value .strike { text-decoration: line-through; color: var(--brand-muted); font-size: 18px; margin-right: 8px; font-family: 'Inter'; font-weight: 600; }
+  .plan-hero {
+    background: var(--brand-black);
+    color: var(--brand-white);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-bottom: 24px;
+  }
+  .plan-hero .label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 8px; }
+  .plan-hero .value { font-family: 'Bebas Neue'; font-size: 44px; }
+  .plan-hero .value .strike { text-decoration: line-through; color: rgba(255,255,255,0.4); font-size: 22px; margin-right: 10px; font-family: 'Inter'; font-weight: 600; }
+  .plan-hero .sub { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .plan-notes { font-size: 13.5px; color: var(--brand-muted); }
+  .plan-notes p { margin-bottom: 8px; }
+  .plan-warn {
+    background: #FFF4E5;
+    border: 1px solid #FFD79A;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .faq-head { margin-bottom: 20px; }
+  .faq-head h2 { font-size: clamp(26px, 4vw, 36px); }
+  .faq-item { border-bottom: 1px solid #eee; padding: 20px 0; }
+  .faq-item h3 { font-family: 'Inter'; font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+  .faq-item p { color: var(--brand-muted); font-size: 15px; }
+
+  footer { padding: 28px 0 48px; text-align: center; font-size: 13px; color: var(--brand-muted); }
+  footer a { color: var(--brand-secondary); font-weight: 600; text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .calc-grid, .plan-grid { grid-template-columns: 1fr; }
+    .calc-box { margin-top: -56px; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap"><span class="mark">Ministry of <span>OATS</span></span></div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Build Your Program.<br>See Your Price.</h1>
+    <p>Two numbers, and we'll tell you exactly what a Ministry of Oats office fridge program costs for your team.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="calc-box" id="calculator">
+    <div class="calc-grid">
+      <div class="field">
+        <label for="emp-count">How many employees do you have?</label>
+        <input type="number" id="emp-count" min="1" placeholder="e.g. 40">
+      </div>
+      <div class="field">
+        <label>Working days per week</label>
+        <div class="day-toggle">
+          <label><input type="radio" name="days" value="5" checked><span>Mon&ndash;Fri (5-day)</span></label>
+          <label><input type="radio" name="days" value="6"><span>Mon&ndash;Sat (6-day)</span></label>
+        </div>
+      </div>
+    </div>
+    <button class="btn" id="generate-btn" onclick="generatePlan()">Generate My Plan</button>
+
+    <div class="plan-result" id="plan-result">
+      <div id="plan-warn-slot"></div>
+      <div class="plan-hero">
+        <div class="label">Your Monthly Total</div>
+        <div class="value"><span class="strike" id="out-retail-total"></span><span id="out-monthly-total"></span></div>
+        <div class="sub" id="out-savings-line"></div>
+      </div>
+      <div class="plan-grid">
+        <div class="plan-stat">
+          <div class="label">Recommended Daily Stock</div>
+          <div class="value" id="out-daily"></div>
+        </div>
+        <div class="plan-stat">
+          <div class="label">Price per Oats</div>
+          <div class="value"><span class="strike">&#8377;199</span><span id="out-price"></span></div>
+        </div>
+        <div class="plan-stat">
+          <div class="label">Cost per Employee / Month</div>
+          <div class="value" id="out-per-employee"></div>
+        </div>
+        <div class="plan-stat">
+          <div class="label">Working Days / Month</div>
+          <div class="value" id="out-days"></div>
+        </div>
+      </div>
+      <div class="plan-notes">
+        <p><strong>Why 80%, not 100%?</strong> We recommend stocking 80% of your headcount daily &mdash; not everyone shows up or wants one every day, and this avoids paying for waste. Want full 100% coverage instead? That's fine too &mdash; just know a colleague may end up finishing 1&ndash;2 extra oats on a slow day.</p>
+        <p><strong>Minimum &amp; maximum:</strong> We need at least 10 pieces/day to set up a fridge program, and can stock up to 99 pieces/day per fridge today.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="faq-head"><h2>Questions HR usually asks</h2></div>
+    <div class="faq-item">
+      <h3>Do employees pay anything?</h3>
+      <p>No. This is entirely employer-sponsored. Employees don't pay, order, or scan anything for what's in the fridge.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What if nobody eats one on a given day?</h3>
+      <p>Your daily stock is set at 80% of headcount by default, specifically to keep this low. If you'd rather stock less and accept occasional stockouts, or more and accept occasional leftovers, we can adjust &mdash; talk to us.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is this a subscription with a lock-in?</h3>
+      <p>No flat monthly fee, no capacity you're forced to pay for. You're billed on what's actually stocked each month.</p>
+    </div>
+    <div class="faq-item">
+      <h3>We work 6 days a week &mdash; can you still do this?</h3>
+      <p>Yes. Pick Mon&ndash;Sat above and pricing adjusts for the extra stocking days.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's actually in the fridge?</h3>
+      <p>Three rotating flavours of fresh, sealed overnight oats (250g, 12&ndash;14g protein each) &mdash; restocked in your office every working morning before 9am.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Ministry of Oats &middot; Office Fridge Program &middot; <a href="mailto:partnerships@ministryofoats.com?subject=Office%20Fridge%20-%20Let's%20talk">Talk to us</a></div>
+</footer>
+
+<script>
+  function priceForDaily(d) {
+    // NOTE: 10-24 (₹169) and 75-99 (₹119) were given directly by the business.
+    // 25-49 (₹159) and 50-74 (₹139) are interpolated placeholders — not yet confirmed. Update here if the real numbers differ.
+    if (d <= 24) return 169;
+    if (d <= 49) return 159;
+    if (d <= 74) return 139;
+    return 119;
+  }
+
+  function generatePlan() {
+    const empInput = document.getElementById('emp-count');
+    const employees = parseInt(empInput.value, 10);
+    if (!employees || employees < 1) {
+      empInput.style.borderColor = '#FF3D47';
+      empInput.focus();
+      return;
+    }
+    empInput.style.borderColor = '#e2e2e2';
+
+    const days = document.querySelector('input[name="days"]:checked').value;
+    const workingDaysPerMonth = days === '6' ? 26 : 22;
+
+    const rawRecommended = Math.round(employees * 0.8);
+    const underMin = rawRecommended < 10;
+    const overCap = rawRecommended > 99;
+    const daily = Math.min(Math.max(rawRecommended, 10), 99);
+
+    const retail = 199;
+    const price = priceForDaily(daily);
+    const monthlyDiscounted = daily * price * workingDaysPerMonth;
+    const monthlyRetail = daily * retail * workingDaysPerMonth;
+    const perEmployee = monthlyDiscounted / employees;
+    const savingsPct = Math.round((1 - price / retail) * 100);
+
+    const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+    document.getElementById('out-retail-total').textContent = fmt(monthlyRetail);
+    document.getElementById('out-monthly-total').textContent = fmt(monthlyDiscounted);
+    document.getElementById('out-savings-line').textContent = savingsPct + '% below retail · ' + fmt(perEmployee) + ' per employee per month';
+    document.getElementById('out-daily').textContent = daily + ' / day';
+    document.getElementById('out-price').textContent = fmt(price);
+    document.getElementById('out-per-employee').textContent = fmt(perEmployee);
+    document.getElementById('out-days').textContent = workingDaysPerMonth + ' days';
+
+    const warnSlot = document.getElementById('plan-warn-slot');
+    warnSlot.innerHTML = '';
+    if (underMin) {
+      const w = document.createElement('div');
+      w.className = 'plan-warn';
+      w.textContent = '80% of ' + employees + ' employees is ' + rawRecommended + '/day — below our 10-piece minimum, so we’ve rounded up to 10/day to get you started.';
+      warnSlot.appendChild(w);
+    } else if (overCap) {
+      const w = document.createElement('div');
+      w.className = 'plan-warn';
+      w.textContent = 'A team your size (' + employees + ' employees) recommends ' + rawRecommended + ' pieces/day — above the 99/day one fridge can hold today. The numbers below are capped at 99/day; email us to talk about a second fridge for the rest.';
+      warnSlot.appendChild(w);
+    }
+
+    const result = document.getElementById('plan-result');
+    result.classList.add('visible');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+
+</body>
+</html>
